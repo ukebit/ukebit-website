@@ -46,10 +46,28 @@
             z-index: 100;
         }
 
-        .logo {
+        /* Logo容器（图片+文字） */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Logo图片样式 */
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            /* 科技感边框效果 */
+            border: 1px solid rgba(79, 195, 247, 0.5);
+            box-shadow: 0 0 8px rgba(79, 195, 247, 0.3);
+        }
+
+        .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #4fc3f7;
+            color: #FFF;
             text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
         }
 
@@ -97,7 +115,7 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #4fc3f7, #9c27b0);
+            background: linear-gradient(90deg, #ffffff, #68ade2);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -119,6 +137,15 @@
             .hero p {
                 font-size: 1rem;
             }
+
+            .logo-img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -130,152 +157,96 @@
                 padding: 0.3rem 0.6rem;
                 font-size: 0.8rem;
             }
+
+            .logo-img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .logo-container {
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 粒子背景容器 -->
-    <div id="particles-js"></div>
+<!-- 粒子背景容器 -->
+<div id="particles-js"></div>
 
-    <!-- 导航栏 -->
-    <nav>
-        <div class="logo" data-lang="logo">游可比特工作室</div>
-        <!-- 语言切换按钮 -->
-        <div class="lang-switch">
-            <button class="lang-btn active" data-lang="zh">中文</button>
-            <button class="lang-btn" data-lang="en">English</button>
-        </div>
-    </nav>
+<!-- 导航栏 -->
+<nav>
+    <!-- Logo容器：图片 + 文字 -->
+    <div class="logo-container">
+        <img src="./assets/ukebit.png" alt="游可比特工作室Logo" class="logo-img">
+        <div class="logo-text" data-lang="logo">游可比特工作室</div>
+    </div>
+    <!-- 语言切换按钮 -->
+    <div class="lang-switch">
+        <button class="lang-btn active" id="zh-btn">中文</button>
+        <button class="lang-btn" id="en-btn">EN</button>
+    </div>
+</nav>
 
-    <!-- 主内容区 -->
-    <section class="hero" id="home">
-        <h1 data-lang="title">游可比特工作室</h1>
-        <p data-lang="desc">专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。</p>
-    </section>
+<!-- 主内容区 -->
+<section class="hero" id="home">
+    <h1 data-lang="title">游可比特工作室</h1>
+    <p data-lang="desc">专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。</p>
+</section>
 
-    <!-- 粒子背景脚本 -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // 语言包配置（修正英文名称为ukebit）
-        const langConfig = {
-            zh: {
-                logo: "游可比特工作室",
-                title: "游可比特工作室",
-                desc: "专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。",
-                htmlLang: "zh-CN",
-                pageTitle: "游可比特工作室 - 创意游戏开发"
-            },
-            en: {
-                logo: "ukebit Studio",
-                title: "ukebit Studio",
-                desc: "Focus on creative game development, integrate cutting-edge technology with interesting gameplay, create unique gaming experiences, and explore the infinite possibilities of the game world.",
-                htmlLang: "en",
-                pageTitle: "ukebit Studio - Creative Game Development"
-            }
-        };
-
-        // 初始化粒子背景
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#4fc3f7"
-                },
-                "shape": {
-                    "type": "circle"
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true
-                },
-                "size": {
-                    "value": 3,
-                    "random": true
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#4fc3f7",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // 语言切换逻辑
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const langElements = document.querySelectorAll('[data-lang]');
-
-        // 切换语言函数
-        function switchLanguage(lang) {
-            // 更新页面语言属性和标题
-            document.documentElement.lang = langConfig[lang].htmlLang;
-            document.title = langConfig[lang].pageTitle;
-
-            // 更新所有带data-lang属性的元素内容
-            langElements.forEach(el => {
-                const key = el.getAttribute('data-lang');
-                el.textContent = langConfig[lang][key];
-            });
-
-            // 更新按钮激活状态
-            langButtons.forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+<!-- 粒子背景脚本 -->
+<script>
+    // 语言包配置（修正英文名称为ukebit）
+    const langConfig = {
+        zh: {
+            logo: "游可比特工作室",
+            title: "游可比特工作室",
+            desc: "专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。",
+            htmlLang: "zh-CN",
+            pageTitle: "游可比特工作室 - 创意游戏开发"
+        },
+        en: {
+            logo: "ukebit Studio",
+            title: "ukebit Studio",
+            desc: "Focus on creative game development, integrate cutting-edge technology with interesting gameplay, create unique gaming experiences, and explore the infinite possibilities of the game world.",
+            htmlLang: "en",
+            pageTitle: "ukebit Studio - Creative Game Development"
         }
+    };
 
-        // 绑定语言切换按钮事件
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetLang = btn.getAttribute('data-lang');
-                switchLanguage(targetLang);
-            });
+    // 语言切换逻辑（修复按钮文字消失问题）
+    const zhBtn = document.getElementById('zh-btn');
+    const enBtn = document.getElementById('en-btn');
+    const langElements = document.querySelectorAll('[data-lang]');
+
+    // 切换语言函数
+    function switchLanguage(lang) {
+        // 更新页面语言属性和标题
+        document.documentElement.lang = langConfig[lang].htmlLang;
+        document.title = langConfig[lang].pageTitle;
+
+        // 仅更新业务文本元素，不包含切换按钮
+        langElements.forEach(el => {
+            const key = el.getAttribute('data-lang');
+            el.textContent = langConfig[lang][key];
         });
-    </script>
+
+        // 更新按钮激活状态
+        if (lang === 'zh') {
+            zhBtn.classList.add('active');
+            enBtn.classList.remove('active');
+        } else {
+            enBtn.classList.add('active');
+            zhBtn.classList.remove('active');
+        }
+    }
+
+    // 绑定语言切换按钮事件
+    zhBtn.addEventListener('click', () => switchLanguage('zh'));
+    enBtn.addEventListener('click', () => switchLanguage('en'));
+</script>
 </body>
 </html>
