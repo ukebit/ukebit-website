@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游可比特工作室 - 创意游戏开发</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* 背景与粒子容器 */
+        body {
+            background: #0a0a1a;
+            color: #e0e0ff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* 导航栏 - 玻璃拟态效果 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 180, 255, 0.2);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4fc3f7;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+        }
+
+        /* 语言切换按钮 */
+        .lang-switch {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.8rem;
+            background: rgba(10, 10, 26, 0.5);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            color: #e0e0ff;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active {
+            background: #4fc3f7;
+            color: #0a0a1a;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.6);
+        }
+
+        .lang-btn:hover:not(.active) {
+            border-color: #4fc3f7;
+            color: #4fc3f7;
+        }
+
+        /* 主内容区 */
+        .hero {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #4fc3f7, #9c27b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            color: #b0b0ff;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .lang-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景容器 -->
+    <div id="particles-js"></div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="logo" data-lang="logo">游可比特工作室</div>
+        <!-- 语言切换按钮 -->
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="zh">中文</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <section class="hero" id="home">
+        <h1 data-lang="title">游可比特工作室</h1>
+        <p data-lang="desc">专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。</p>
+    </section>
+
+    <!-- 粒子背景脚本 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 语言包配置（修正英文名称为ukebit）
+        const langConfig = {
+            zh: {
+                logo: "游可比特工作室",
+                title: "游可比特工作室",
+                desc: "专注创意游戏开发，融合前沿技术与趣味玩法，打造独一无二的游戏体验，探索游戏世界的无限可能。",
+                htmlLang: "zh-CN",
+                pageTitle: "游可比特工作室 - 创意游戏开发"
+            },
+            en: {
+                logo: "ukebit Studio",
+                title: "ukebit Studio",
+                desc: "Focus on creative game development, integrate cutting-edge technology with interesting gameplay, create unique gaming experiences, and explore the infinite possibilities of the game world.",
+                htmlLang: "en",
+                pageTitle: "ukebit Studio - Creative Game Development"
+            }
+        };
+
+        // 初始化粒子背景
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#4fc3f7"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#4fc3f7",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // 语言切换逻辑
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const langElements = document.querySelectorAll('[data-lang]');
+
+        // 切换语言函数
+        function switchLanguage(lang) {
+            // 更新页面语言属性和标题
+            document.documentElement.lang = langConfig[lang].htmlLang;
+            document.title = langConfig[lang].pageTitle;
+
+            // 更新所有带data-lang属性的元素内容
+            langElements.forEach(el => {
+                const key = el.getAttribute('data-lang');
+                el.textContent = langConfig[lang][key];
+            });
+
+            // 更新按钮激活状态
+            langButtons.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // 绑定语言切换按钮事件
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetLang = btn.getAttribute('data-lang');
+                switchLanguage(targetLang);
+            });
+        });
+    </script>
+</body>
+</html>
